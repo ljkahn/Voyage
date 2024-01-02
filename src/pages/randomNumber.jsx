@@ -96,6 +96,7 @@ function RandomNumber() {
                     </Col>
                   ))}
                 </Row>
+                <button onClick={handleSaveToSpotify}>Save To Spotify</button>
               </div>
             </Card.Body>
           </Card>
