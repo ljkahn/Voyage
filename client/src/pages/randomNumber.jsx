@@ -62,36 +62,55 @@ function RandomNumber() {
     }
   };
 
+  // const handleSaveToSpotify = () => {
+  //   // Replace 'YOUR_SPOTIFY_ACCESS_TOKEN' with the actual access token obtained through OAuth 2.0
+  //   const accessToken = "YOUR_SPOTIFY_ACCESS_TOKEN";
+
+  //   if (!accessToken) {
+  //     // Redirect to the Spotify login page if the user is not authenticated
+  //     navigate("/login"); // Replace with your actual login route
+  //     return;
+  //   }
+
+  //   // Assume you have the list of Spotify track IDs for the top albums
+  //   const trackIds = topAlbums.map((album) => album.spotifyTrackId);
+
+  //   // Use the Spotify API to add the tracks to the user's library
+  //   fetch("https://api.spotify.com/v1/me/tracks", {
+  //     method: "PUT",
+  //     headers: {
+  //       "Content-Type": "application/json",
+  //       Authorization: `Bearer ${accessToken}`,
+  //     },
+  //     body: JSON.stringify({
+  //       ids: trackIds,
+  //     }),
+  //   })
+  //     .then((response) => response.json())
+  //     .then((data) => {
+  //       console.log("Tracks saved to Spotify:", data);
+  //     })
+  //     .catch((error) => {
+  //       console.error("Error saving tracks to Spotify:", error);
+  //     });
+  // };
+
   const handleSaveToSpotify = () => {
-    // Replace 'YOUR_SPOTIFY_ACCESS_TOKEN' with the actual access token obtained through OAuth 2.0
+    // Use the obtained access token to make requests to the Spotify API
+    // Example: Fetch user's playlists
     const accessToken = "YOUR_SPOTIFY_ACCESS_TOKEN";
-
-    if (!accessToken) {
-      // Redirect to the Spotify login page if the user is not authenticated
-      navigate("/login"); // Replace with your actual login route
-      return;
-    }
-
-    // Assume you have the list of Spotify track IDs for the top albums
-    const trackIds = topAlbums.map((album) => album.spotifyTrackId);
-
-    // Use the Spotify API to add the tracks to the user's library
     fetch("https://api.spotify.com/v1/me/tracks", {
-      method: "PUT",
+      method: "GET",
       headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${accessToken}`,
+        Authorization: `Bearer ${accessToken}`, // Replace with your actual access token
       },
-      body: JSON.stringify({
-        ids: trackIds,
-      }),
     })
       .then((response) => response.json())
       .then((data) => {
-        console.log("Tracks saved to Spotify:", data);
+        console.log("User's Tracks:", data);
       })
       .catch((error) => {
-        console.error("Error saving tracks to Spotify:", error);
+        console.error("Error fetching tracks:", error);
       });
   };
 
